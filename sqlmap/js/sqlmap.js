@@ -90,7 +90,7 @@ function enumCheck() {
 }
 
 function redirectHome() {
-  window.location="/sqlmap/index.php";
+  window.location="/sqlmpui/index.php";
 }
 
 function validateMarkerInjection() {
@@ -123,9 +123,9 @@ function validate() {
 }
 
 function downloadScanResults(hostName) {
-  window.location="/sqlmap/download.php?target=" + encodeURIComponent(hostName);
+  window.location="/sqlmpui/download.php?target=" + encodeURIComponent(hostName);
 }
 
 function scanKill(scanId) {
-  window.location="/sqlmap/kill.php?id="+scanId;
+  window.location="/sqlmpui/kill.php?id="+scanId;
 }

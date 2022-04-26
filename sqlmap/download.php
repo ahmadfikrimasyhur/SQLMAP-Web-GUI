@@ -107,7 +107,5 @@
       echo "<script>setTimeout('redirectHome()', 5000);</script>";
     }
   } else {
-    header("Location: /sqlmap/index.php");
+    header("Location: /sqlmpui/index.php");
   }
-  
-?>
