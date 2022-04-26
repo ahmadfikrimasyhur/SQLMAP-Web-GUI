@@ -339,6 +339,7 @@ class SQLMAPClientAPI
           'timeout' => 60
         )
       );
+
       $context = stream_context_create($opts);
       $json = json_decode(file_get_contents($this->api . "option/" . $taskid . "/get", false, $context), true);
       // echo "<br>";
@@ -347,17 +348,18 @@ class SQLMAPClientAPI
         return $json['options'][$optstr];
       }
     }
+
     return false;
   }
 
 
   /*
-       Set SQLMAP Configuration Option Value under specific task ID
-       Returns true on success, false otherwise
-         $taskid = your user level task id to look under
-         $optstr = the SQLMAP configuration option we want to set value for (case sensitive)
-         $optvalue = the value to set for configuration option above ($optstr)
-    */
+    Set SQLMAP Configuration Option Value under specific task ID
+    Returns true on success, false otherwise
+    $taskid = your user level task id to look under
+    $optstr = the SQLMAP configuration option we want to set value for (case sensitive)
+    $optvalue = the value to set for configuration option above ($optstr)
+  */
   public function setOptionValue($taskid, $optstr, $optvalue, $integer = false)
   {
     // Sorry, not going to pass through code to be eval'd here...
@@ -381,12 +383,14 @@ class SQLMAPClientAPI
           )
         );
       }
+
       $context = stream_context_create($opts);
       $json = json_decode(file_get_contents($this->api . "option/" . $taskid . "/set", false, $context), true);
       if ($json['success'] == "true") {
         return true;
       }
     }
+
     return false;
   }
 
@@ -492,7 +496,6 @@ class SQLMAPClientAPI
     return false;
   }
 
-
   /*
        Review a subset of the SQLMAP scan log messages
        Message subset is based on start and end points provided by user
@@ -527,31 +530,31 @@ class SQLMAPClientAPI
 
 
   /*
-       Review the FULL set of SQLMAP scan log messages
-       Returns associative array on success, false otherwise
-           array(
-             "log"  => array(
-               array(
-                 "message" => "testing connection to the target URL", 
-                 "level" => "INFO",
-                 "time" => "19:44:23"
-               ),
-               array(
-                 "message" => "testing if the target URL is stable. This can take a couple of seconds", 
-                 "level" => "INFO",
-                 "time" => "19:44:24"
-               ), 
-               array(...)
-           );
-
-         $taskid = your user level task id to get scan log for
-    */
+    Review the FULL set of SQLMAP scan log messages
+    Returns associative array on success, false otherwise
+    array(
+      "log"  => array(
+        array(
+          "message" => "testing connection to the target URL", 
+          "level" => "INFO",
+          "time" => "19:44:23"
+        ),
+        array(
+          "message" => "testing if the target URL is stable. This can take a couple of seconds", 
+          "level" => "INFO",
+          "time" => "19:44:24"
+        ), 
+        array(...)
+    );
+    $taskid = your user level task id to get scan log for
+  */
   public function reviewScanLogFull($taskid)
   {
     $json = json_decode(file_get_contents($this->api . "scan/" . $taskid . "/log"), true);
     if ($json['success'] == 1) {
       return $json['log'];
     }
+
     return false;
   }
 
